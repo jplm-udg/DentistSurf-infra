@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: dentistsurf
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"            # Edge service port
+      - "4571:4571"            # S3
+    environment:
+      - AWS_ACCESS_KEY_ID=test-key
+      - AWS_SECRET_ACCESS_KEY=test-secret
+      - SERVICES=s3,sqs,sns
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+volumes:
+  postgres_data:
