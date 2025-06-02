@@ -16,8 +16,8 @@ services:
       - "4566:4566"            # Edge service port
       - "4571:4571"            # S3
     environment:
-      - AWS_ACCESS_KEY_ID=test-key
-      - AWS_SECRET_ACCESS_KEY=test-secret
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
       - SERVICES=s3,sqs,sns
       - DEFAULT_REGION=us-east-1
       - DEBUG=1
